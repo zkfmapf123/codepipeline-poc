@@ -12,7 +12,7 @@ phases:
     commands:
       - echo "pre_build"
       - CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-      - echo "current: $CURRENT_BRANCH"
+      - echo "current >> $CURRENT_BRANCH"
 
   ## Image To Docker & Tagging
 #   build:
