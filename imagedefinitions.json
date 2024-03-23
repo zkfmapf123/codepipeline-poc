@@ -17,7 +17,7 @@
             "environment": [
                 {
                     "name": "REACT_APP_VERSION",
-                    "value": "13"
+                    "value": "${REACT_APP_VERSION}"
                 }
             ],
             "mountPoints": [],
