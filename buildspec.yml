@@ -34,6 +34,6 @@ phases:
 ## 현재 파일 중 task-definition.json 파일을 artifact로 내보낸다 (아티팩트는 zip파일로 구성되어있음...)
 artifacts:
   files:
-    - imagedefinitions.json.json
+    - imagedefinitions.json
 
 
