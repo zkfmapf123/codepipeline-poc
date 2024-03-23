@@ -11,29 +11,31 @@ phases:
   pre_build:
     commands:
       - echo "pre_build"
+      - CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+      - echo "current: $CURRENT_BRANCH"
 
   ## Image To Docker & Tagging
-  build:
-    commands:
-      - echo "BUILD NUMBER >> $CODEBUILD_BUILD_NUMBER"
-      - echo "ACCOUNT >> $AWS_ACCOUNT"
-      - docker build -t web:$CODEBUILD_BUILD_NUMBER .
-      - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com
-      - docker build -t hello-world .
-      - docker tag web:$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:$CODEBUILD_WEBHOOK_HEAD_REF-$CODEBUILD_BUILD_NUMBER
+#   build:
+#     commands:
+#       - echo "BUILD NUMBER >> $CODEBUILD_BUILD_NUMBER"
+#       - echo "ACCOUNT >> $AWS_ACCOUNT"
+#       - docker build -t web:$CODEBUILD_BUILD_NUMBER .
+#       - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com
+#       - docker build -t hello-world .
+#       - docker tag web:$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:$CODEBUILD_WEBHOOK_HEAD_REF-$CODEBUILD_BUILD_NUMBER
 
-  ## Upload Docker Registry & Update Task Definition
-  post_build:
-    commands:
-      - echo "post_build"
-      - docker push $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:$CODEBUILD_WEBHOOK_HEAD_REF-$CODEBUILD_BUILD_NUMBER
-      - sed -i "s/\${VERSION}/$CODEBUILD_WEBHOOK_HEAD_REF-$CODEBUILD_BUILD_NUMBER/g" imagedefinitions.json
-      - sed -i "s/\${REACT_APP_VERSION}/$CODEBUILD_BUILD_NUMBER/g" imagedefinitions.json
-      - cat imagedefinitions.json
+#   ## Upload Docker Registry & Update Task Definition
+#   post_build:
+#     commands:
+#       - echo "post_build"
+#       - docker push $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:$CODEBUILD_WEBHOOK_HEAD_REF-$CODEBUILD_BUILD_NUMBER
+#       - sed -i "s/\${VERSION}/$CODEBUILD_WEBHOOK_HEAD_REF-$CODEBUILD_BUILD_NUMBER/g" imagedefinitions.json
+#       - sed -i "s/\${REACT_APP_VERSION}/$CODEBUILD_BUILD_NUMBER/g" imagedefinitions.json
+#       - cat imagedefinitions.json
 
-## 현재 파일 중 task-definition.json 파일을 artifact로 내보낸다 (아티팩트는 zip파일로 구성되어있음...)
-artifacts:
-  files:
-    - imagedefinitions.json
+# ## 현재 파일 중 task-definition.json 파일을 artifact로 내보낸다 (아티팩트는 zip파일로 구성되어있음...)
+# artifacts:
+#   files:
+#     - imagedefinitions.json
 
 
