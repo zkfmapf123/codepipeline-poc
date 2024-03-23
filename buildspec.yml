@@ -10,8 +10,14 @@ phases:
 
   build:
     commands:
-      - echo "build_build"
+      - echo "BUILD NUMBER >> $CODEBUILD_BUILD_NUMBER"
+      - echo "ACCOUNT >> $AWS_ACCOUNT"
+      - docker build -t web:$CODEBUILD_BUILD_NUMBER .
+      - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com
+      - docker build -t hello-world .
+      - docker tag hello-world:latest $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:latest
 
   post_build:
     commands:
       - echo "post_build"
+      - docker push $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:latest
