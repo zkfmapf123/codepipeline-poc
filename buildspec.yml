@@ -11,7 +11,6 @@ phases:
   pre_build:
     commands:
       - echo "pre_build"
-      - CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
       - $printenv
 
   ## Image To Docker & Tagging
