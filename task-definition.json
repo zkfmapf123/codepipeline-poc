@@ -1,3 +1,4 @@
+[
 {
     "containerDefinitions": [
         {
@@ -54,3 +55,4 @@
         "operatingSystemFamily": "LINUX"
     }
 }
+]
