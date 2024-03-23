@@ -1,34 +1,32 @@
-[
-    {
-        "name": "hello-world",
-        "image": "182024812696.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:${VERSION}",
-        "cpu": 0,
-        "portMappings": [
-            {
-                "name": "hello-world-80-tcp",
-                "containerPort": 80,
-                "hostPort": 80,
-                "protocol": "tcp",
-                "appProtocol": "http"
-            }
-        ],
-        "essential": true,
-        "environment": [
-            {
-                "name": "REACT_APP_VERSION",
-                "value": "${REACT_APP_VERSION}"
-            }
-        ],
-        "mountPoints": [],
-        "volumesFrom": [],
-        "logConfiguration": {
-            "logDriver": "awslogs",
-            "options": {
-                "awslogs-create-group": "true",
-                "awslogs-group": "/ecs/hw-service",
-                "awslogs-region": "ap-northeast-2",
-                "awslogs-stream-prefix": "ecs"
-            }
+{
+    "name": "hello-world",
+    "image": "182024812696.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:${VERSION}",
+    "cpu": 0,
+    "portMappings": [
+        {
+            "name": "hello-world-80-tcp",
+            "containerPort": 80,
+            "hostPort": 80,
+            "protocol": "tcp",
+            "appProtocol": "http"
+        }
+    ],
+    "essential": true,
+    "environment": [
+        {
+            "name": "REACT_APP_VERSION",
+            "value": "${REACT_APP_VERSION}"
+        }
+    ],
+    "mountPoints": [],
+    "volumesFrom": [],
+    "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+            "awslogs-create-group": "true",
+            "awslogs-group": "/ecs/hw-service",
+            "awslogs-region": "ap-northeast-2",
+            "awslogs-stream-prefix": "ecs"
         }
     }
-]
+}
