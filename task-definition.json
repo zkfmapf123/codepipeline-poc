@@ -1,58 +1,39 @@
 [
-{
-    "containerDefinitions": [
-        {
-            "name": "hello-world",
-            "image": "182024812696.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:${VERSION}",
-            "cpu": 0,
-            "portMappings": [
-                {
-                    "name": "hello-world-80-tcp",
-                    "containerPort": 80,
-                    "hostPort": 80,
-                    "protocol": "tcp",
-                    "appProtocol": "http"
-                }
-            ],
-            "essential": true,
-            "environment": [
-                {
-                    "name": "REACT_APP_VERSION",
-                    "value": "${REACT_APP_VERSION}"
-                }
-            ],
-            "mountPoints": [],
-            "volumesFrom": [],
-            "logConfiguration": {
-                "logDriver": "awslogs",
-                "options": {
-                    "awslogs-create-group": "true",
-                    "awslogs-group": "/ecs/hw-service",
-                    "awslogs-region": "ap-northeast-2",
-                    "awslogs-stream-prefix": "ecs"
-                }
-            },
-            "systemControls": []
-        }
-    ],
-    "family": "hw-service",
-    "taskRoleArn": "arn:aws:iam::182024812696:role/ecs-execution-role",
-    "executionRoleArn": "arn:aws:iam::182024812696:role/ecsTaskExecutionRole",
-    "volumes": [],
-    "status": "ACTIVE",
-    "placementConstraints": [],
-    "compatibilities": [
-        "EC2",
-        "FARGATE"
-    ],
-    "requiresCompatibilities": [
-        "FARGATE"
-    ],
-    "cpu": "512",
-    "memory": "1024",
-    "runtimePlatform": {
-        "cpuArchitecture": "X86_64",
-        "operatingSystemFamily": "LINUX"
+    {
+        "containerDefinitions": [
+            {
+                "name": "hello-world",
+                "image": "182024812696.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:${VERSION}",
+                "cpu": 0,
+                "portMappings": [
+                    {
+                        "name": "hello-world-80-tcp",
+                        "containerPort": 80,
+                        "hostPort": 80,
+                        "protocol": "tcp",
+                        "appProtocol": "http"
+                    }
+                ],
+                "essential": true,
+                "environment": [
+                    {
+                        "name": "REACT_APP_VERSION",
+                        "value": "${REACT_APP_VERSION}"
+                    }
+                ],
+                "mountPoints": [],
+                "volumesFrom": [],
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {
+                        "awslogs-create-group": "true",
+                        "awslogs-group": "/ecs/hw-service",
+                        "awslogs-region": "ap-northeast-2",
+                        "awslogs-stream-prefix": "ecs"
+                    }
+                },
+                "systemControls": []
+            }
+        ]
     }
-}
 ]
