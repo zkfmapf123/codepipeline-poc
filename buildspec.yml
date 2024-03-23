@@ -20,7 +20,7 @@ phases:
       - docker build -t web:$CODEBUILD_BUILD_NUMBER .
       - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com
       - docker build -t hello-world .
-      - docker tag web:$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:$CODEBUILD_BUILD_NUMBER
+      - docker tag web:$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:$PIPELINE_STAGE-$CODEBUILD_BUILD_NUMBER
 
   ## Upload Docker Registry
   post_build:
