@@ -12,7 +12,7 @@ phases:
 
   pre_build:
     commands:
-      - echo "print codebuild env"
+      - echo "print codebuild $BRANCH_NAME"
       - printenv > env.txt
       - cat env.txt
 
