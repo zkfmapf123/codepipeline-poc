@@ -1,4 +1,8 @@
 version: 0.2
+env:
+  variables:
+    PIPELINE_STAGE: master
+
 phases:
   install:
     commands:
@@ -22,4 +26,4 @@ phases:
   post_build:
     commands:
       - echo "post_build"
-      - docker push $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:$CODEBUILD_BUILD_NUMBER
+      - docker push $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:$PIPELINE_STAGE-$CODEBUILD_BUILD_NUMBER
