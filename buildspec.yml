@@ -31,8 +31,9 @@ phases:
     commands:
       - echo "post_build"
       - docker push $AWS_ACCOUNT.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:$BRANCH_NAME-$CODEBUILD_BUILD_NUMBER
-      - sed -i "s/\${VERSION}/$BRANCH_NAME-$CODEBUILD_BUILD_NUMBER/g" imagedefinitions.json
-      - sed -i "s/\${REACT_APP_VERSION}/$BRANCH_NAME-$CODEBUILD_BUILD_NUMBER/g" imagedefinitions.json
+      - printf '[{"name":"hello-world","imageUri":"%s"}]' 182024812696.dkr.ecr.ap-northeast-2.amazonaws.com/hello-world:$BRANCH_NAME-$CODEBUILD_BUILD_NUMBER > imagedefinitions.json
+      # - sed -i "s/\${VERSION}/$BRANCH_NAME-$CODEBUILD_BUILD_NUMBER/g" imagedefinitions.json
+      # - sed -i "s/\${REACT_APP_VERSION}/$BRANCH_NAME-$CODEBUILD_BUILD_NUMBER/g" imagedefinitions.json
       - cat imagedefinitions.json
 
 ## 현재 파일 중 task-definition.json 파일을 artifact로 내보낸다 (아티팩트는 zip파일로 구성되어있음...)
