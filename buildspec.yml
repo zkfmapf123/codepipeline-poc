@@ -11,7 +11,8 @@ phases:
   pre_build:
     commands:
       - echo "pre_build"
-      - $printenv
+      - printenv > env.txt
+      - cat env.txt
 
   ## Image To Docker & Tagging
 #   build:
